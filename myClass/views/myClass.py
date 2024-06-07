@@ -13,15 +13,17 @@ class myClassView(APIView):
             cr=data.get('course')
             course=cr.upper()
             date=data.get('date')
-            if course is not None:
-                user=myClass.objects.get(course=course,date=date)
-                serializer=myClassSerializers(user)
-            else:
-                snippets = myClass.objects.all()
-                serializer = myClassSerializers(snippets, many=True)
-            return Response(serializer.data)
+            dic={}
+            j=0
+            user=myClass.objects.all()
+            serializer=myClassSerializers(user,many=True)
+            for d in serializer.data:
+                if d['course']==course and d['date']==date:
+                    dic[j]=d
+                    j=j+1
+            return Response(dic)
         except :
-            return Response("Data and course may not match !",status=status.HTTP_400_BAD_REQUEST)
+            return Response("Date and course may not match !",status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request, format=None):
         python_data=request.data 
