@@ -7,16 +7,21 @@ from rest_framework import status
 
 
 class myClassView(APIView):
-    def get(self, request,course=None, format=None):
-        if course=="BCA" or course=="bca" or course=="Bca":
-            course="BCA"
-        if course is not None:
-            user=myClass.objects.get(course=course)
-            serializer=myClassSerializers(user)
-        else:
-            snippets = myClass.objects.all()
-            serializer = myClassSerializers(snippets, many=True)
-        return Response(serializer.data)
+    def get(self, request, format=None):
+        try:
+            data=request.data
+            cr=data.get('course')
+            course=cr.upper()
+            date=data.get('date')
+            if course is not None:
+                user=myClass.objects.get(course=course,date=date)
+                serializer=myClassSerializers(user)
+            else:
+                snippets = myClass.objects.all()
+                serializer = myClassSerializers(snippets, many=True)
+            return Response(serializer.data)
+        except :
+            return Response("Data and course may not match !",status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request, format=None):
         python_data=request.data 
@@ -26,9 +31,8 @@ class myClassView(APIView):
         pe=python_data.get('end')
         cr=python_data.get('course')
         ds=python_data.get('description')
-        model_data=myClass.objects.filter(faculty_name=fn,period_date=pd,period_start=ps,period_end=pe,course=cr,description=ds)
+        model_data=myClass.objects.filter(faculty_name=fn,date=pd,start=ps,end=pe,course=cr,description=ds)
         if model_data.exists():
-            print("Exits")
             return Response("Record Save already",status=status.HTTP_400_BAD_REQUEST)
         serializer = myClassSerializers(data=request.data)
         if serializer.is_valid():

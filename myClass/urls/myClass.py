@@ -10,7 +10,7 @@ urlpatterns = [
     path("post_myclass/",myClassView.as_view()),
     path("update_myclass/<int:pk>",myClassView.as_view()),
     path("get_myclass/",myClassView.as_view()),
-    path("get_myclass/<str:course>",myClassView.as_view()),
+    # path("get_myclass/<str:course>",myClassView.as_view()),
     path("delete_myclass/<int:pk>",myClassView.as_view()),
 ]
 
