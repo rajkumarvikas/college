@@ -12,9 +12,9 @@ urlpatterns = [
     path('api/users/',include("users.urls.address")),
     path('api/users/',include("users.urls.qualification")),
     path('api/users/',include("users.urls.document")),
-    path('api/myclass/',include("myClass.urls.myClass")),
+    path('api/',include("myClass.urls.myClass")),
     path('api/faculty/',include("faculty_login.urls")),
-    path('api/result/',include("result.urls.result")),
+    path('api/student/',include("result.urls.result")),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

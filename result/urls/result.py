@@ -15,5 +15,5 @@ urlpatterns = [
     path("fourth_semester/<int:rid>",Sem_fourth_Views.as_view()),
     path("fifth_semester/<int:rid>",Sem_fifth_Views.as_view()),
     path("sixth_semester/<int:rid>",Sem_sixth_Views.as_view()),
-    path("all/",Result_All.as_view()),
+    path("result/",Result_All.as_view()),
 ]

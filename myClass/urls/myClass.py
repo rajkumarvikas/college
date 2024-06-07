@@ -7,11 +7,11 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path("post_myclass/",myClassView.as_view()),
-    path("update_myclass/<int:pk>",myClassView.as_view()),
-    path("get_myclass/",myClassView.as_view()),
+    path("faculty/my-class/",myClassView.as_view()),
+    path("student/my-class/<int:pk>",myClassView.as_view()),
+    path("student/my-class/",myClassView.as_view()),
     # path("get_myclass/<str:course>",myClassView.as_view()),
-    path("delete_myclass/<int:pk>",myClassView.as_view()),
+    path("delete-my-class/<int:pk>",myClassView.as_view()),
 ]
 
 if settings.DEBUG:
