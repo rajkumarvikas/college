@@ -17,7 +17,7 @@ from result.serializers.result_serializers import *
 
 
 class Result_All(APIView):
-    def get(self, request, format=None):
+    def post(self, request, format=None):
         try:
             data=request.data
             rid=int(data.get('rid'))
