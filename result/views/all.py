@@ -21,11 +21,9 @@ class Result_All(APIView):
         try:
             data=request.data
             rid=int(data.get('rid'))
-            dic={}
+            res={}
+            dic1={}
             j=0
-            dic[j]={
-                "rid":rid
-            }
             user=Sem_first.objects.all()
             serializer=Sem_first_Serializers(user,many=True)
             python_data=serializer.data
@@ -42,10 +40,12 @@ class Result_All(APIView):
                         }
                         obtain_marks=obtain_marks+d['obtain_marks']
                         j=j+1
-                        dic[j]=d
+                        dic1[j]=d
                         break
             j=j+1
-            dic[j]={"total_marks":obtain_marks}
+            dic1[j]={"total_marks":obtain_marks}
+            dic2={}
+            j=0
             user=Sem_second.objects.all()
             serializer=Sem_second_Serializers(user,many=True)
             python_data=serializer.data
@@ -62,10 +62,12 @@ class Result_All(APIView):
                         }
                         obtain_marks=obtain_marks+d['obtain_marks']
                         j=j+1
-                        dic[j]=d
+                        dic2[j]=d
                         break
             j=j+1
-            dic[j]={"total_marks":obtain_marks}
+            dic2[j]={"total_marks":obtain_marks}
+            dic3={}
+            j=0
             user=Sem_third.objects.all()
             serializer=Sem_third_Serializers(user,many=True)
             python_data=serializer.data
@@ -82,10 +84,12 @@ class Result_All(APIView):
                         }
                         obtain_marks=obtain_marks+d['obtain_marks']
                         j=j+1
-                        dic[j]=d
+                        dic3[j]=d
                         break
             j=j+1
-            dic[j]={"total_marks":obtain_marks}
+            dic3[j]={"total_marks":obtain_marks}
+            dic4={}
+            j=0
             user=Sem_fourth.objects.all()
             serializer=Sem_fourth_Serializers(user,many=True)
             python_data=serializer.data
@@ -102,10 +106,12 @@ class Result_All(APIView):
                         }
                         obtain_marks=obtain_marks+d['obtain_marks']
                         j=j+1
-                        dic[j]=d
+                        dic4[j]=d
                         break
             j=j+1
-            dic[j]={"total_marks":obtain_marks}
+            dic4[j]={"total_marks":obtain_marks}
+            dic5={}
+            j=0
             user=Sem_fifth.objects.all()
             serializer=Sem_fifth_Serializers(user,many=True)
             python_data=serializer.data
@@ -122,10 +128,12 @@ class Result_All(APIView):
                         }
                         obtain_marks=obtain_marks+d['obtain_marks']
                         j=j+1
-                        dic[j]=d
+                        dic5[j]=d
                         break
             j=j+1
-            dic[j]={"total_marks":obtain_marks}
+            dic5[j]={"total_marks":obtain_marks}
+            dic6={}
+            j=0
             user=Sem_sixth.objects.all()
             serializer=Sem_sixth_Serializers(user,many=True)
             python_data=serializer.data
@@ -140,11 +148,19 @@ class Result_All(APIView):
                             "viva_voce":d["viva_voce"],
                         }
                         j=j+1
-                        dic[j]=d
+                        dic6[j]=d
                         break
             j=j+1
-            dic[j]={"total_marks":obtain_marks}
-            return Response(dic)
+            dic6[j]={"total_marks":obtain_marks}
+            res={
+                'sem1':dic1,
+                'sem2':dic2,
+                'sem3':dic3,
+                'sem4':dic4,
+                'sem5':dic5,
+                'sem6':dic6
+                }
+            return Response(res)
         except :
            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
