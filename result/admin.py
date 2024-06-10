@@ -67,8 +67,10 @@ class Sem_fifth_admin(admin.ModelAdmin):
 class Sem_sixth_admin(admin.ModelAdmin):
     list_display=('rid',
                   'semester',
-                  'project_name',
-                  'seminar_presentation',
-                  'viva_voce',
+                  'paper_title',
+                  'obtain_marks'
+                #   'project_name',
+                #   'seminar_presentation',
+                #   'viva_voce',
                   )
     ordering=['rid']
