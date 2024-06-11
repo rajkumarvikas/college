@@ -15,6 +15,7 @@ import requests
 
 api_token = '620475f529a9036435425c686eed9774914ed0c9'
 username = 'Arkas'
+upload_path = '/home/Arkas/documents/'
 def Upload_Url(u):
     print(u)
     url="home/Arkas/college"+str(u)
@@ -53,13 +54,31 @@ class Document_View(APIView):
             tenth=python_data.get('tenth')
             twelth=python_data.get('twelth')
             python_data={
-                'rid':rid,
                 'photo':photo,
                 'signatue':signatue,
                 'adhar':adhar,
                 'tenth':tenth,
-                'twelth':tenth,
+                'twelth':twelth,
             }
+
+            # updating code here...........
+            responseData =[]
+            
+            for doc in python_data :
+                response = requests.post(
+                    url=f'https://www.pythonanywhere.com/api/v0/user/{username}/files/path/{upload_path}/{rid}/{python_data[doc]}',
+                    headers={'Authorization': f'Token {api_token}'},
+                    files={'file': ('photo.jpg', python_data[doc].read())}
+                )
+                if response.status_code == 200:
+                    print(responseData)
+                    print('File uploaded successfully')
+                else:
+                    print(f'Failed to upload file: {response.status_code}, {response.text}')
+                responseData.append(response)
+
+            return Response("File Uploaded successfully", data=responseData)
+
 
             serializer=Document_Serializers(data=python_data)
             if serializer.is_valid():
