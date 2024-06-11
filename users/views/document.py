@@ -15,6 +15,7 @@ import requests
 
 api_token = '620475f529a9036435425c686eed9774914ed0c9'
 username = 'Arkas'
+upload_path = '/home/Arkas/documents/'
 def Upload_Url(u):
     print(u)
     url="home/Arkas/college"+str(u)
@@ -53,49 +54,46 @@ class Document_View(APIView):
             tenth=python_data.get('tenth')
             twelth=python_data.get('twelth')
             python_data={
-                'rid':rid,
                 'photo':photo,
                 'signatue':signatue,
                 'adhar':adhar,
                 'tenth':tenth,
-                'twelth':tenth,
+                'twelth':twelth,
             }
 
-            serializer=Document_Serializers(data=python_data)
-            if serializer.is_valid():
-                serializer.save()
-                user=Document_model.objects.get(rid=rid)
-                serializer=Document_Serializers(user)
-                us=serializer.data
-                list1=[]
-                for i in us:
-                    if i=='id' or i=='rid':
-                        continue
-                    response = requests.post(
-                        url=f'https://www.pythonanywhere.com/api/v0/user/{username}/files/path/{Upload_Url(us[i])}',
-                        headers={'Authorization': f'Token {api_token}'},
-                        files={"content": ('photo', photo.read())}
-                        )
-                    list1.append(response.url)
-                python_data1={
-                    'rid':rid,
-                    'photo_url':list1[0],
-                    'signatue_url':list1[1],
-                    'adhar_url':list1[2],
-                    'tenth_url':list1[3],
-                    'twelth_url':list1[4]
-                }
-                seri=Document_url_Serializers(data=python_data1)
-                if seri.is_valid():
-                    seri.save()
-                    return Response("Document Uploaded Successfully",status=status.HTTP_201_CREATED)
+            # updating code here...........
+            responseData =[]
+            
+            for doc in python_data :
+                response = requests.post(
+                    url=f'https://www.pythonanywhere.com/api/v0/user/{username}/files/path/{upload_path}/{rid}/{python_data[doc]}',
+                    headers={'Authorization': f'Token {api_token}'},
+                    files={'content': ('photo.jpg', python_data[doc].read())}
+                )
+                if response.status_code >= 200 or response.status_code <=300:
+                    print(response.url)
+                    print('File uploaded successfully')
                 else:
-                    print("Not upload")
+                    print(f'Failed to upload file: {response.status_code}, {response.text}')
+                responseData.append(response.url)
+
+            python_data1={
+                'rid':rid,
+                'photo_url':responseData[0],
+                'signatue_url':responseData[1],
+                'adhar_url':responseData[2],
+                'tenth_url':responseData[3],
+                'twelth_url':responseData[4]
+            }
+            seri=Document_url_Serializers(data=python_data1)
+            if seri.is_valid():
+                seri.save()
+                return Response(responseData,status=status.HTTP_201_CREATED)
             else:
-                print(f'Failed to upload file: {response.status_code}, {response.text}')
+                return Response("Error while uploading file !",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except Document_model.DoesNotExist:
             return Response("Field not exits",status=status.HTTP_400_BAD_RESQUEST)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response(seri.errors,status=status.HTTP_400_BAD_REQUEST)
     def put(self,request,pk=None,format=None):
         try:
             user=Document_model.objects.get(pk=pk)
