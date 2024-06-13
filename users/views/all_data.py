@@ -38,6 +38,7 @@ class All_Data_View(APIView):
 
                 
                 data={
+                    'rid':pk,
                     'registration_id':registration_id,
                     'college_id':college_id,
                     'first_name':first_name,
@@ -58,6 +59,7 @@ class All_Data_View(APIView):
                 nationality=python_data['nationality']
 
                 data={
+                    'rid':pk,
                     'registration_id':registration_id,
                     'first_name':first_name,
                     'middle_name':middle_name,
@@ -84,6 +86,7 @@ class All_Data_View(APIView):
                 contract_number=python_data['contract_number']
                 alternate_number=python_data['alternate_number']
                 data={
+                    'rid':pk,
                     'registration_id':registration_id,
                     'first_name':first_name,
                     'middle_name':middle_name,
@@ -97,7 +100,7 @@ class All_Data_View(APIView):
                     'cast':cast,
                     'dob':dob,
                     'nationality':nationality,
-                    'building_number':building_number,
+                    'building_number':str(building_number),
                     'locality':locality,
                     'sublocality':sublocality,
                     'state':state,
@@ -117,6 +120,7 @@ class All_Data_View(APIView):
                 obtain_marks=python_data['obtain_marks']
 
                 data={
+                    'rid':pk,
                     'registration_id':registration_id,
                     'first_name':first_name,
                     'middle_name':middle_name,
@@ -130,7 +134,7 @@ class All_Data_View(APIView):
                     'cast':cast,
                     'dob':dob,
                     'nationality':nationality,
-                    'building_number':building_number,
+                    'building_number':str(building_number),
                     'locality':locality,
                     'sublocality':sublocality,
                     'state':state,
@@ -156,6 +160,7 @@ class All_Data_View(APIView):
 
 
                 data={
+                    'rid':pk,
                     'registration_id':registration_id,
                     'first_name':first_name,
                     'middle_name':middle_name,
@@ -169,7 +174,7 @@ class All_Data_View(APIView):
                     'cast':cast,
                     'dob':dob,
                     'nationality':nationality,
-                    'building_number':building_number,
+                    'building_number':str(building_number),
                     'locality':locality,
                     'sublocality':sublocality,
                     'state':state,
