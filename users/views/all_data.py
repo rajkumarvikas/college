@@ -15,6 +15,8 @@ from users.serializers.document_urls import Document_url_Serializers
 from users.serializers.personalDetails import Persona_Details_Serializers
 from users.serializers.qualification import Qualification_Serializers
 from users.serializers.registration import User_Serializers
+from payment.models import Payement
+from payment.serializers import PaymentSerializers
 import io
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
@@ -118,6 +120,7 @@ class All_Data_View(APIView):
                 roll_code=python_data['roll_code']
                 total_marks=python_data['total_marks']
                 obtain_marks=python_data['obtain_marks']
+        
 
                 data={
                     'id':pk,
@@ -158,7 +161,10 @@ class All_Data_View(APIView):
                 tenth=python_data['tenth_url']
                 twelth=python_data['twelth_url']
 
-
+                user1=Payement.objects.get(rid=pk)
+                serializer1=PaymentSerializers(user1)
+                python_data1=serializer1.data
+                pay=python_data1['pay']
                 data={
                     'id':pk,
                     'registration_id':registration_id,
@@ -192,7 +198,8 @@ class All_Data_View(APIView):
                     'signature':signatue,
                     'adhar':adhar,
                     'tenth':tenth,
-                    'twelth':tenth,
+                    'twelth':twelth,
+                    'pay':pay,
 
                 }
                 return Response(data)

@@ -15,6 +15,8 @@ from users.serializers.document_urls import Document_url_Serializers
 from users.serializers.personalDetails import Persona_Details_Serializers
 from users.serializers.qualification import Qualification_Serializers
 from users.serializers.registration import User_Serializers
+from payment.models import Payement
+from payment.serializers import PaymentSerializers
 import random
 import io
 from django.http import HttpResponse, JsonResponse
@@ -60,8 +62,17 @@ class Login_View(APIView):
                     email=python_data['email']
 
                     
-          
-                
+                    data={
+                         'id':pk,
+                         'registration_id':registration_id,
+                         'college_id':college_id,
+                         'first_name':first_name,
+                         'middle_name':middle_name,
+                         'last_name':last_name,
+                         'role':role,
+                         'phone':phone,
+                         'email':email
+                    }
                     user=Personal_Details.objects.get(rid=pk)
                     serializer=Persona_Details_Serializers(user)
                     python_data=serializer.data
@@ -72,8 +83,21 @@ class Login_View(APIView):
                     dob=python_data['dob']
                     nationality=python_data['nationality']
 
-     
-            
+                    data={
+                         'id':pk,
+                         'registration_id':registration_id,
+                         'first_name':first_name,
+                         'middle_name':middle_name,
+                         'last_name':last_name,
+                         'role':role,
+                         'phone':phone,
+                         'email':email,
+                         'father_name':father_name,
+                         'mother_name':mother_name,
+                         'sex':sex,
+                         'cast':cast,
+                         'dob':dob,
+                         'nationality':nationality}
 
                     user=Address_Model.objects.get(rid=pk)
                     serializer=Address_Serializers(user)
@@ -86,7 +110,29 @@ class Login_View(APIView):
                     pincode=python_data['pincode']
                     contract_number=python_data['contract_number']
                     alternate_number=python_data['alternate_number']
-                 
+                    data={
+                         'id':pk,
+                         'registration_id':registration_id,
+                         'first_name':first_name,
+                         'middle_name':middle_name,
+                         'last_name':last_name,
+                         'role':role,
+                         'phone':phone,
+                         'email':email,
+                         'father_name':father_name,
+                         'mother_name':mother_name,
+                         'sex':sex,
+                         'cast':cast,
+                         'dob':dob,
+                         'nationality':nationality,
+                         'building_number':str(building_number),
+                         'locality':locality,
+                         'sublocality':sublocality,
+                         'state':state,
+                         'district':district,
+                         'pincode':pincode,
+                         'contract_number':contract_number,
+                         'alternate_number':alternate_number}
 
                     user=Qualifications_model.objects.get(rid=pk)
                     serializer=Qualification_Serializers(user)
@@ -98,6 +144,36 @@ class Login_View(APIView):
                     total_marks=python_data['total_marks']
                     obtain_marks=python_data['obtain_marks']
 
+                    data={
+                         'id':pk,
+                         'registration_id':registration_id,
+                         'first_name':first_name,
+                         'middle_name':middle_name,
+                         'last_name':last_name,
+                         'role':role,
+                         'phone':phone,
+                         'email':email,
+                         'father_name':father_name,
+                         'mother_name':mother_name,
+                         'sex':sex,
+                         'cast':cast,
+                         'dob':dob,
+                         'nationality':nationality,
+                         'building_number':str(building_number),
+                         'locality':locality,
+                         'sublocality':sublocality,
+                         'state':state,
+                         'district':district,
+                         'pincode':pincode,
+                         'contract_number':contract_number,
+                         'alternate_number':alternate_number,
+                         'status':status1,
+                         'year':year,
+                         'school':school,
+                         'roll_code':roll_code,
+                         'total_marks':total_marks,
+                         'obtain_marks':obtain_marks}
+
                     user=Document_Url.objects.get(rid=pk)
                     serializer=Document_url_Serializers(user)
                     python_data=serializer.data
@@ -106,7 +182,10 @@ class Login_View(APIView):
                     adhar=python_data['adhar_url']
                     tenth=python_data['tenth_url']
                     twelth=python_data['twelth_url']
-
+                    user1=Payement.objects.get(rid=pk)
+                    serializer1=PaymentSerializers(user1)
+                    python_data1=serializer1.data
+                    pay=python_data1['pay']
 
                     data={
                          'id':pk,
@@ -141,11 +220,11 @@ class Login_View(APIView):
                          'signature':signatue,
                          'adhar':adhar,
                          'tenth':tenth,
-                         'twelth':tenth,
+                         'twelth':twelth,
+                         'pay':pay,
 
                     }
-                    return Response(data,status=status.HTTP_202_ACCEPTED)
+                    return Response(data)
                 
-            except User_Model.DoesNotExist:
-                return Response("User id and passwrord",status=status.HTTP_404_NOT_FOUND)
-            return Response("user id or password not matchiing.",status=status.HTTP_404_NOT_FOUND)
+            except:
+                return Response(data)

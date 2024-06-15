@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'faculty_login',
     'result',
     'feedback',
+    'payment',
 ]
 
 MIDDLEWARE = [
