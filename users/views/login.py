@@ -24,6 +24,18 @@ from rest_framework.parsers import JSONParser
 from django.contrib.auth.hashers import make_password,check_password
 from rest_framework.decorators import api_view
 
+
+def pay(pk):
+    try:
+        user1=Payement.objects.get(rid=pk)
+        print(user1)
+        serializer1=PaymentSerializers(user1)
+        python_data1=serializer1.data
+        pay=python_data1['pay']
+        return pay
+    except:
+         return "false"
+
 class Login_View(APIView):
         def post(self, request, format=None):
             try:
@@ -182,11 +194,6 @@ class Login_View(APIView):
                     adhar=python_data['adhar_url']
                     tenth=python_data['tenth_url']
                     twelth=python_data['twelth_url']
-                    user1=Payement.objects.get(rid=pk)
-                    serializer1=PaymentSerializers(user1)
-                    python_data1=serializer1.data
-                    pay=python_data1['pay']
-
                     data={
                          'id':pk,
                          'registration_id':registration_id,
@@ -221,7 +228,7 @@ class Login_View(APIView):
                          'adhar':adhar,
                          'tenth':tenth,
                          'twelth':twelth,
-                         'pay':pay,
+                         'pay':pay(pk),
 
                     }
                     return Response(data)

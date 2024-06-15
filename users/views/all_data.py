@@ -21,6 +21,17 @@ import io
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 
+def pay(pk):
+    try:
+        user1=Payement.objects.get(rid=pk)
+        print(user1)
+        serializer1=PaymentSerializers(user1)
+        python_data1=serializer1.data
+        pay=python_data1['pay']
+        return pay
+    except:
+         return "false"
+
 
 class All_Data_View(APIView):
     def get(self, request,pk=None, format=None):
@@ -161,10 +172,6 @@ class All_Data_View(APIView):
                 tenth=python_data['tenth_url']
                 twelth=python_data['twelth_url']
 
-                user1=Payement.objects.get(rid=pk)
-                serializer1=PaymentSerializers(user1)
-                python_data1=serializer1.data
-                pay=python_data1['pay']
                 data={
                     'id':pk,
                     'registration_id':registration_id,
@@ -199,9 +206,9 @@ class All_Data_View(APIView):
                     'adhar':adhar,
                     'tenth':tenth,
                     'twelth':twelth,
-                    'pay':pay,
+                    'pay':pay(pk),
 
                 }
                 return Response(data)
         except :
-            return Response(data)
+                return Response(data)
