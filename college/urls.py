@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/faculty/',include("faculty_login.urls")),
     path('api/student/',include("result.urls.result")),
     path('api/',include("feedback.urls.feedback")),
+    path('api/',include("payment.urls.payment")),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
