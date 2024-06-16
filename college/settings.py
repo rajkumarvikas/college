@@ -13,36 +13,35 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ftr99v-b+h!jkk%=ny&3k^z4rb71v@ov7po952)ea7s8(axeun'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 INSTALLED_APPS = [
-
-    'corsheaders',
-    
+    "corsheaders",
 ]
 
 
-
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://my-frontend-domain.com",
-    "https://collegetime.vercal.app"
+    "https://collegetime.vercal.app",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
 ]
 
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
     "PUT",
-    "PATCH",
     "DELETE",
-    "OPTIONS",
 ]
 
-CORS_ALLOW_HEADERS = [
+CORS_ALLOW_HEADERS = (
+    "accept",
     "authorization",
     "content-type",
-]
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -66,11 +65,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
