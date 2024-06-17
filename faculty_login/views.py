@@ -24,18 +24,18 @@ class faculty_View(APIView):
                 password=python_data.get('password')
                 if password=='' or password==None :
                      return Response("Password is required ",status=status.HTTP_204_NO_CONTENT)
-                college_id=python_data.get('college_id')
-                if college_id=='' or college_id==None :
+                course=python_data.get('course')
+                if course=='' or course==None :
                      return Response("college id is required ",status=status.HTTP_204_NO_CONTENT)
                 user=User_Model.objects.all()
                 serializer=User_Serializers(user,many=True)
                 em=serializer.data
                 k=0
                 for i in em:
-                     if email==i['email'] and college_id=='123456' and check_password(password,i['password']):
+                     if email==i['email'] and course=='123456' and check_password(password,i['password']):
                           record={
                                    'id':i['id'],
-                                   'college_id':i['college_id'],
+                                   'course':i['course'],
                                    'registration_id':i['registration_id'],
                                    'first_name':i['first_name'],
                                    'middle_name':i['middle_name'],
