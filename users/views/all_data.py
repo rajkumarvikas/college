@@ -41,7 +41,7 @@ class All_Data_View(APIView):
                 serializer=User_Serializers(user)
                 python_data=serializer.data
                 registration_id=python_data['registration_id']
-                college_id=python_data['college_id']
+                course=python_data['course']
                 first_name=python_data['first_name']
                 middle_name=python_data['middle_name']
                 last_name=python_data['last_name']
@@ -53,7 +53,7 @@ class All_Data_View(APIView):
                 data={
                     'id':pk,
                     'registration_id':registration_id,
-                    'college_id':college_id,
+                    'course':course,
                     'first_name':first_name,
                     'middle_name':middle_name,
                     'last_name':last_name,
