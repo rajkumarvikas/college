@@ -10,7 +10,7 @@ from users.models.Document_urls import Document_Url
 @admin.register(User_Model)
 class User_Admin(admin.ModelAdmin):
     list_display=['id',
-                  'college_id',
+                  'course',
                   'registration_id',
                   'first_name',
                   'middle_name',
