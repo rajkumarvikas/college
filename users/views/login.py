@@ -51,9 +51,6 @@ class Login_View(APIView):
                 user=User_Model.objects.all()
                 serializer=User_Serializers(user,many=True)
                 em=serializer.data
-                for j in em:
-                     if email==j[email] and j[role]=="faculty":
-                          return Response("can't login in Faculty view",status=status.HTTP_401_UNAUTHORIZED)
                 k=0
                 for i in em:
                      if email==i['email'] and check_password(password,i['password']):
@@ -73,6 +70,8 @@ class Login_View(APIView):
                     middle_name=python_data['middle_name']
                     last_name=python_data['last_name']
                     role=python_data['role']
+                    if role=="faculty":
+                         return Response("can't login in student view",status=status.HTTP_401_UNAUTHORIZED)
                     phone=python_data['phone']
                     email=python_data['email']
 
