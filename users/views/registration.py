@@ -44,9 +44,9 @@ class User_View(APIView):
             last_name=python_data.get('last_name')
             if last_name==None or last_name=="":
                 last_name=None
-            college_id=python_data.get('college_id')
-            if college_id==None or college_id=="":
-                college_id=None
+            course=python_data.get('course')
+            if course==None or course=="":
+                course=None
             role=python_data.get('role')
             phone=python_data.get('phone')
             email=python_data.get('email')
@@ -59,7 +59,7 @@ class User_View(APIView):
                 return Response("Email already exits",status=status.HTTP_400_BAD_REQUEST)
             python_data={
             'registration_id':account(),
-            'college_id':college_id,
+            'course':course,
             'first_name':first_name,
             'middle_name':middle_name,
             'last_name':last_name,

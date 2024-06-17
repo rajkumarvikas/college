@@ -44,13 +44,16 @@ class Login_View(APIView):
                 python_data=JSONParser().parse(stream)
                 email=python_data.get('email')
                 if email=='' or email==None:
-                     return Response("Email is required",status=status.HTTP_204_NO_CONTENT)
+                     return Response("Email is required",status=status.HTTP_401_UNAUTHORIZED)
                 password=python_data.get('password')
                 if password=='' or password==None :
-                     return Response("Password is required ",status=status.HTTP_204_NO_CONTENT)
+                     return Response("Password is required ",status=status.HTTP_401_UNAUTHORIZED)
                 user=User_Model.objects.all()
                 serializer=User_Serializers(user,many=True)
                 em=serializer.data
+                for j in em:
+                     if email==j[email] and j[role]=="faculty":
+                          return Response("can't login in Faculty view",status=status.HTTP_401_UNAUTHORIZED)
                 k=0
                 for i in em:
                      if email==i['email'] and check_password(password,i['password']):
@@ -58,7 +61,7 @@ class Login_View(APIView):
                          k=1
                          break
                 if k==0:
-                     return Response("user id or password not matching ",status=status.HTTP_204_NO_CONTENT)
+                     return Response("user id or password not matching ",status=status.HTTP_401_UNAUTHORIZED)
                 else:
                     pk=record
                     user=User_Model.objects.get(pk=pk)
