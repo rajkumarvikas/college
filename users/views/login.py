@@ -55,7 +55,7 @@ class Login_View(APIView):
                      if email==j['email']:
                           m=1
                 if m==0:
-                     return Response("Email not exits")
+                     return Response("Email not exits",status=status.HTTP_404_NOT_FOUND)
                 
                 k=0
                 for i in em:
