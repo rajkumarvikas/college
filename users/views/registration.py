@@ -56,7 +56,7 @@ class User_View(APIView):
             password=make_password(password)
             user=User_Model.objects.filter(email=email)
             if user.exists():
-                return Response("Email already exits",status=status.HTTP_400_BAD_REQUEST)
+                return Response("Email already exits",status=status.HTTP_409_CONFLICT)
             python_data={
             'registration_id':account(),
             'course':course,

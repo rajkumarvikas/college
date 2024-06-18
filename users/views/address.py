@@ -34,7 +34,7 @@ class Address_View(APIView):
             rid=python_data.get('rid')
             user=Address_Model.objects.filter(rid=rid)
             if user.exists():
-                return Response("Personal Details save already",status=status.HTTP_400_BAD_REQUEST)
+                return Response("Personal Details save already",status=status.HTTP_409_CONFLICT)
 
             json_data=request.body
             stream=io.BytesIO(json_data)

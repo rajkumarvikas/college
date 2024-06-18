@@ -35,7 +35,7 @@ class Personal_Details_View(APIView):
             rid=python_data.get('rid')
             user=Personal_Details.objects.filter(rid=rid)
             if user.exists():
-                return Response("Personal Details save already",status=status.HTTP_400_BAD_REQUEST)
+                return Response("Personal Details save already",status=status.HTTP_409_CONFLICT)
             
             json_data=request.body
             stream=io.BytesIO(json_data)
@@ -46,7 +46,7 @@ class Personal_Details_View(APIView):
             new_email=python_data.get('email')
             user=User_Model.objects.filter(email=new_email)
             if user.exists():
-                return Response("Email already exits",status=status.HTTP_400_BAD_REQUEST)
+                return Response("Email already exits",status=status.HTTP_409_CONFLICT)
             new_phone=python_data.get('phone')
             sex=python_data.get('sex')
             cast=python_data.get('cast')

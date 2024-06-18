@@ -44,7 +44,7 @@ class Login_View(APIView):
                 python_data=JSONParser().parse(stream)
                 email=python_data.get('email')
                 if email=='' or email==None:
-                     return Response("Email is required",status=status.HTTP_401_UNAUTHORIZED)
+                     return Response("Email is required",status=status.HTTP_404_NOT_FOUND)
                 password=python_data.get('password')
                 if password=='' or password==None :
                      return Response("Password is required ",status=status.HTTP_401_UNAUTHORIZED)

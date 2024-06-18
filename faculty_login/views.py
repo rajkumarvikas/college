@@ -20,7 +20,7 @@ class faculty_View(APIView):
                 python_data=JSONParser().parse(stream)
                 email=python_data.get('email')
                 if email=='' or email==None:
-                     return Response("Email is required",status=status.HTTP_204_NO_CONTENT)
+                     return Response("Email is required",status=status.HTTP_400_BAD_REQUEST)
                 password=python_data.get('password')
                 if password=='' or password==None :
                      return Response("Password is required ",status=status.HTTP_204_NO_CONTENT)
