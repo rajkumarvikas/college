@@ -15,6 +15,8 @@ SECRET_KEY = 'django-insecure-ftr99v-b+h!jkk%=ny&3k^z4rb71v@ov7po952)ea7s8(axeun
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS=['*']
+
 INSTALLED_APPS = [
     "corsheaders",
 ]

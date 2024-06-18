@@ -28,7 +28,6 @@ from rest_framework.decorators import api_view
 def pay(pk):
     try:
         user1=Payement.objects.get(rid=pk)
-        print(user1)
         serializer1=PaymentSerializers(user1)
         python_data1=serializer1.data
         pay=python_data1['pay']
@@ -51,6 +50,13 @@ class Login_View(APIView):
                 user=User_Model.objects.all()
                 serializer=User_Serializers(user,many=True)
                 em=serializer.data
+                m=0
+                for j in em:
+                     if email==j['email']:
+                          m=1
+                if m==0:
+                     return Response("Email not exits")
+                
                 k=0
                 for i in em:
                      if email==i['email'] and check_password(password,i['password']):
