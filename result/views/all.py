@@ -46,7 +46,7 @@ class Result_All(APIView):
                         k=1
                         break
             if k==0:
-                return Response("No Result Found !")
+                return Response("No Result Found !",status=status.HTTP_404_NOT_FOUND)
             j=j+1
             dic1[j]={"total_marks":obtain_marks}
             res={
