@@ -106,6 +106,7 @@ class Login_View(APIView):
                     data={
                          'id':pk,
                          'registration_id':registration_id,
+                         'course':course,
                          'first_name':first_name,
                          'middle_name':middle_name,
                          'last_name':last_name,
@@ -133,6 +134,7 @@ class Login_View(APIView):
                     data={
                          'id':pk,
                          'registration_id':registration_id,
+                         'course':course,
                          'first_name':first_name,
                          'middle_name':middle_name,
                          'last_name':last_name,
@@ -167,6 +169,7 @@ class Login_View(APIView):
                     data={
                          'id':pk,
                          'registration_id':registration_id,
+                         'course':course,
                          'first_name':first_name,
                          'middle_name':middle_name,
                          'last_name':last_name,
@@ -205,6 +208,7 @@ class Login_View(APIView):
                     data={
                          'id':pk,
                          'registration_id':registration_id,
+                         'course':course,
                          'first_name':first_name,
                          'middle_name':middle_name,
                          'last_name':last_name,
