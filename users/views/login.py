@@ -77,8 +77,7 @@ class Login_View(APIView):
                     last_name=python_data['last_name']
                     role=python_data['role']
                     if role=="faculty":
-                         data="can't login in student view"
-                         return Response("can't login in student view",status=status.HTTP_401_UNAUTHORIZED)
+                         return Response("can't login in student view",status=status.HTTP_400_BAD_REQUEST)
                     phone=python_data['phone']
                     email=python_data['email']
 

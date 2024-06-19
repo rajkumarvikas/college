@@ -24,7 +24,7 @@ class faculty_View(APIView):
                 password=python_data.get('password')
                 if password=='' or password==None :
                      return Response("Password is required ",status=status.HTTP_204_NO_CONTENT)
-                course=python_data.get('course')
+                course=python_data.get('collegeID')
                 if course=='' or course==None :
                      return Response("college id is required ",status=status.HTTP_204_NO_CONTENT)
                 user=User_Model.objects.all()
