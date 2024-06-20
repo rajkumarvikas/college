@@ -4,7 +4,7 @@ from django.db import models
 class User_Model(models.Model):
     id=models.AutoField(primary_key=True)
     registration_id = models.CharField(max_length=15,null=False)
-    course=models.CharField(max_length=30,null=True)
+    course=models.CharField(max_length=50,null=True)
     first_name = models.CharField(max_length=30,null=False)
     middle_name = models.CharField(max_length=30,null=True)
     last_name = models.CharField(max_length=30,null=True)
