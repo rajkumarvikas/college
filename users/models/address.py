@@ -12,4 +12,4 @@ class Address_Model(models.Model):
     district=models.CharField(max_length=50)
     pincode=models.CharField(max_length=6)
     contract_number=models.CharField(max_length=10)
-    alternate_number=models.CharField(max_length=10)
+    alternate_number=models.CharField(max_length=10,null=True)
